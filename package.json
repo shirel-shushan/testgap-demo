@@ -1,0 +1,19 @@
+{
+  "name": "testgap-demo",
+  "version": "1.0.0",
+  "description": "Demo target repository for an AI tool that detects untested code in pull requests and generates tests for it.",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "coverage": "vitest run --coverage"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@vitest/coverage-v8": "^4.1.11",
+    "vitest": "^4.1.11"
+  }
+}

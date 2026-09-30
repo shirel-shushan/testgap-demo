@@ -1,0 +1,5 @@
+node_modules/
+coverage/
+
+# Private answer key for the demo – never commit
+BUGS.md
