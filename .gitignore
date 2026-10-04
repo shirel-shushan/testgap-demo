@@ -4,3 +4,4 @@ coverage/
 # Private answer key for the demo – never commit
 BUGS.md
 tests/generated/
+.testgap/
