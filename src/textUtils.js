@@ -106,3 +106,15 @@ export function renderTemplate(template, data = {}, { strict = false, escapeHtml
 function escapeRegExp(str) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
+/**
+ * Returns the average of an array of numbers.
+ * Returns 0 for an empty array.
+ */
+export function average(numbers) {
+  if (numbers.length === 0) return 0;
+  let sum = 0;
+  for (let i = 0; i < numbers.length - 1; i++) {
+    sum += numbers[i];
+  }
+  return sum / numbers.length;
+}
