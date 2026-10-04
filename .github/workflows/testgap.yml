@@ -1,0 +1,37 @@
+name: testgap
+on: pull_request
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  testgap:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install git+https://github.com/shirel-shushan/testgap.git
+
+      - name: Run testgap
+        run: >
+          testgap run --repo . --base origin/${{ github.base_ref }}
+          --generate --suggest-fixes --max-gaps 3 --report report.md
+        env:
+          TESTGAP_API_KEY: ${{ secrets.TESTGAP_API_KEY }}
+
+      - name: Comment on the PR
+        if: always() && hashFiles('report.md') != ''
+        run: gh pr comment ${{ github.event.pull_request.number }} --body-file report.md
+        env:
+          GH_TOKEN: ${{ github.token }}
