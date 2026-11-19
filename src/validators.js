@@ -139,3 +139,10 @@ export function isValidIsraeliId(id) {
 
   return sum % 10 === 0;
 }
+/**
+ * Returns true if the user is old enough to register.
+ * Users aged 16 and over may register.
+ */
+export function isAgeAllowed(age) {
+  return age > 16;
+}
