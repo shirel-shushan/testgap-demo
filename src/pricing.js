@@ -122,5 +122,21 @@ export function calculateCartTotal(items, { coupon, taxRate = DEFAULT_VAT_RATE, 
     couponApplied: Boolean(coupon) && couponError === null,
     couponError,
   };
-  
+ 
+}
+ /**
+ * Splits a bill evenly between people.
+ * Returns an array of amounts, one per person, each rounded to agorot.
+ * Any rounding remainder is added to the first person's share.
+ * Throws if people is less than 1.
+ */
+export function splitBill(total, people) {
+  if (people < 1) {
+    throw new Error('people must be at least 1');
+  }
+  const base = Math.floor((total * 100) / people) / 100;
+  const shares = new Array(people).fill(base);
+  const remainder = total - base * people;
+  shares[shares.length - 1] = Math.round((base + remainder) * 100) / 100;
+  return shares;
 }
